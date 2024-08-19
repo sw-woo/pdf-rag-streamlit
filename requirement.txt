@@ -1,0 +1,7 @@
+langchain
+pysqlite3
+langchain-chroma
+langchain-community
+langchain-core
+langchain-openai
+langchainhub
