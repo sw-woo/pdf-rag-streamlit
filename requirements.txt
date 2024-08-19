@@ -5,4 +5,4 @@ langchain-community
 langchain-core
 langchain-openai
 langchainhub
-streamlit_extras
+streamlit-extras
