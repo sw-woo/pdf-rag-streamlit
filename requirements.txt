@@ -1,5 +1,5 @@
 langchain
-pysqlite3
+pysqlite3-binary
 langchain-chroma
 langchain-community
 langchain-core
