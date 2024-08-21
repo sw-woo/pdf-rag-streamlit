@@ -72,8 +72,7 @@ if uploaded_file is not None:
 
     # Embeddings and Chroma setup
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_key)
-    vectorstore = Chroma.from_documents(
-        documents=splits, embedding=embeddings_model)
+    vectorstore = Chroma.from_documents(documents=splits, embedding=embeddings_model)
     chroma_retriever = vectorstore.as_retriever(search_kwargs={'k': 1})
 
     # BM25 Retriever setup
