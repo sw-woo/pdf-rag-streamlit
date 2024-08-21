@@ -14,6 +14,11 @@ from langchain_core.output_parsers import StrOutputParser
 from streamlit_extras.buy_me_a_coffee import button
 from langchain.load import dumps, loads
 
+# 베포시 chroma db에서 sqlite3를 사용하는데 오류가 나서 추가하였다.
+import sys
+__import__('pysqlite3')
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+
 # Initialize buy me a coffee button
 button(username="swpheus14", floating=True, width=221)
 
