@@ -64,10 +64,12 @@ def format_docs(docs):
 if uploaded_file is not None:
     pages = pdf_to_document(uploaded_file)
 
-    # Split the documents into chunks
-    text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(
+    # Split
+    text_splitter = RecursiveCharacterTextSplitter(
         chunk_size=500,
-        chunk_overlap=50
+        chunk_overlap=20,
+        length_function=len,
+        is_separator_regex=False,
     )
     splits = text_splitter.split_documents(pages)
 
