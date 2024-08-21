@@ -74,9 +74,7 @@ if uploaded_file is not None:
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_key)
     vectorstore = Chroma.from_documents(
         documents=splits, embedding=embeddings_model)
-    chroma_retriever = vectorstore.as_retriever(search_type="mmr",  # MMR 알고리즘을 사용하여 검색
-                                                # 상위 1개의 문서를 반환하지만, 고려할 문서는 4개로 설정
-                                                search_kwargs={'k': 1, 'fetch_k': 4})
+    chroma_retriever = vectorstore.as_retriever(search_type="mmr",search_kwargs={'k': 1, 'fetch_k': 4})
 
     # BM25 Retriever setup
     bm25_retriever = BM25Retriever.from_documents(splits)
