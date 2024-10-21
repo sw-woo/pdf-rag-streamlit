@@ -78,7 +78,7 @@ if uploaded_file is not None:
 
     # 임베딩 및 Chroma 설정
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_key)
-    index = faiss.IndexFlatL2(len(OpenAIEmbeddings().embed_query("hello world")))
+    index = faiss.IndexFlatL2(len(OpenAIEmbeddings(openai_api_key=openai_key).embed_query("hello world")))
 
     vectorstore = FAISS(
         embedding_function=embeddings_model,
