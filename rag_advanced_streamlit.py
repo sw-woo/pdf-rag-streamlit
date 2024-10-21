@@ -8,7 +8,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain.prompts import ChatPromptTemplate, PromptTemplate
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_chroma import Chroma
+# from langchain_chroma import Chrom
 # 베포시 chromadb 문제로 아래 api 사용
 # from langchain.vectorstores import Chroma
 from langchain.retrievers import BM25Retriever, EnsembleRetriever
