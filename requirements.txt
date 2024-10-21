@@ -10,3 +10,4 @@ pypdf
 protobuf==3.19.0
 rank_bm25
 tiktoken
+faiss-cpu
