@@ -1,6 +1,4 @@
 langchain
-pysqlite3-binary
-langchain-chroma
 langchain-community
 langchain-core
 langchain-openai
