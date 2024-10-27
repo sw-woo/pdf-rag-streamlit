@@ -1,16 +1,12 @@
 import os
 import tempfile
-import sys
 import streamlit as st
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
-from langchain.prompts import ChatPromptTemplate, PromptTemplate
+from langchain.prompts import ChatPromptTemplate
 from langchain.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-# from langchain_chroma import Chrom
-# 베포시 chromadb 문제로 아래 api 사용
-# from langchain.vectorstores import Chroma
 from langchain.retrievers import BM25Retriever, EnsembleRetriever
 from langchain_core.output_parsers import StrOutputParser
 from streamlit_extras.buy_me_a_coffee import button
@@ -66,18 +62,13 @@ if uploaded_file is not None:
         chunk_size=500,
         chunk_overlap=50
     )
-    # 베포시에는 chroma DB문제로 아래 split 사용
-    # Split
-    # text_splitter = RecursiveCharacterTextSplitter(
-    #     chunk_size=500,
-    #     chunk_overlap=20,
-    #     length_function=len,
-    #     is_separator_regex=False,
-    # )
+
     splits = text_splitter.split_documents(pages)
 
-    # 임베딩 및 Chroma 설정
+    # 임베딩 및 faiss 설정
     embeddings_model = OpenAIEmbeddings(openai_api_key=openai_key)
+    embedding_dimension = len(OpenAIEmbeddings(openai_api_key=openai_key).embed_query("hello world"))
+    print(embedding_dimension)
     index = faiss.IndexFlatL2(len(OpenAIEmbeddings(openai_api_key=openai_key).embed_query("hello world")))
 
     vectorstore = FAISS(
@@ -90,9 +81,6 @@ if uploaded_file is not None:
     faiss_retriever = vectorstore.as_retriever(search_type="mmr",  # MMR 알고리즘을 사용하여 검색
                                                 # 상위 1개의 문서를 반환하지만, 고려할 문서는 4개로 설정
                                                 search_kwargs={'k': 1, 'fetch_k': 4})
-
-    # 베포시 chroma DB문제로 아래 선언 사용
-    # faiss_retriever = vectorstore.as_retriever(search_kwargs={'k': 1})
 
     # BM25 리트리버 설정
     bm25_retriever = BM25Retriever.from_documents(splits)
