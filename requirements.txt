@@ -2,7 +2,6 @@ langchain
 langchain-community
 langchain-core
 langchain-openai
-langchainhub
 streamlit-extras
 pypdf
 protobuf==3.19.0
